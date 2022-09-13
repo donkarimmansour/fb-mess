@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include( "partials/head" ); %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="d-flex h-100">
+   
+    <form class="m-auto" method="POST" accept="/">
+
+    <% if (typeof error == 'string' && error) { %> 
+        
+        <div id="errorModal" class="modal fade show d-block" tabindex="-1" role="dialog" aria-labelledby="errorTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content shadow-lg">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorTitle"><%= errtitle %></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"><%= error %></div>
+                    <div class="modal-footer">
+                        <button type="submit" formaction="/alert" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <% } %>
+
+
+        <div class="row m-4">
+            <div class="col">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4>Message</h4>
+                                <hr>
+                            </div>
+                        </div>
+                        <textarea name="message" id="message" class="form-control mb-4"
+                          placeholder="The message that's going to get sent">[name] test</textarea>
+
+                        <div class="row">
+                            <div class="col">
+                                <h4>Ids</h4>
+                                <hr>
+                            </div>
+                        </div>
+                        <textarea name="ids" id="ids" class="form-control mb-4"
+                          placeholder="The ids that's going to get sent to">karim,100054225656711
+karim,10000562555777
+karim,100005625557918</textarea>
+ 
+                        <!-- <div class="row"> 
+                            <div class="col">
+                                <h4>Variables</h4>
+                                <hr>   
+                            </div>
+                        </div>
+                        <ul class="list-group" id="variableList">
+                        </ul>
+                        <hr>
+                        <form id="variableForm">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" id="name" class="form-control" placeholder="Variable name"
+                                           required>
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="value" class="form-control" placeholder="Default value">
+                                </div>
+                                <button type="submit" class="btn btn-primary mr-3">Add</button>
+                            </div>
+                        </form> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row m-4">
+            <div class="col mb-4 mb-md-0">
+                <div class="card shadow-lg h-100">
+
+
+                    <div class="card-header">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </div>
+                            <input type="text" id="friendListSearch" class="form-control" placeholder="Search">
+                            <div class="input-group-append">
+                                <button type="button" id="friendListSelect" class="btn btn-secondary"
+                                        title="Select all">
+                                    <i class="far fa-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <ul class="list-group" id="friendList">
+                            <% if (typeof friends != 'undefined' && friends.length > 0) { %>
+                               <% for ( const friend of friends ) { %>
+                                <li class="list-group-item list-group-item-action friend">
+                    
+                                    <span class="ml-1"><%= friend %></span>
+                                </li>
+                               <% } %>
+                            <% } %>
+                        </ul> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <div class="card shadow-lg" id="userData">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4>Message Preview</h4>
+                                <hr>
+                            </div>
+                        </div>
+                        <textarea id="messagePreview" class="form-control mb-2" readonly></textarea>
+                        
+                        <hr>
+                        <ul class="list-group" id="friendVariableList">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+
+       
+        <div class="row m-4">
+            <div class="col col-md-9 mb-2 mb-md-0">
+                <button type="submit" id="send" class="btn btn-primary shadow-lg w-100">Send</button>
+            </div>
+
+            <div class="col-md">
+                <button type="button" class="btn btn-primary">
+                     <span class="badge badge-light"><%= locals.counter %></span>
+                  </button>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</form>
+
+
+
+<%- include( "partials/script" ); %>
+<script src="index.js"></script>
+</body>
+</html>
