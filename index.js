@@ -5,7 +5,7 @@ const os = require( "os" );
 const path = require( "path" );
 const morgan = require('morgan');
 
-const PORT = 3000; 
+const PORT = 3002; 
 
 console.log( "Checking for new version..." );
 
